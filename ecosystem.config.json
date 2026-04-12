@@ -1,0 +1,15 @@
+{
+    "apps": [
+      {
+        "name": "my-app",
+        "script": "./src/index.js",
+        "instances": "max",
+        "exec_mode": "cluster",
+        "max_memory_restart": "1000M",
+        "env": {
+          "PORT": 4000
+        }
+      }
+    ]
+  }
+  

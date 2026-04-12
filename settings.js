@@ -1,0 +1,15 @@
+module.exports = {
+    useHTTP2: false,
+    origin: ['http://localhost:5173','https://finixaibot.com', 'http://finixaibot.com', 'https://www.finixaibot.com', 'http://www.finixaibot.com', 'http://69.62.122.96'],
+    DB_URL: process.env.MONGODB_URL,
+    PORT: process.env.PORT || 4000,
+    SECRET: 'b2f23561bb2eff865a02bf58f37028c13d0687c0393eedb3b8afacd530dda7ef:2cf1c03bb1ecdc9e1376b27d488bb9c2',
+    COOKIE_NAME: 'AI_ARB_BOT',
+    SMTP_HOST: "finixaibot.com",
+    SMTP_PORT: 465,
+    SMTP_USER: "system@finixaibot.com",
+    SMTP_PASSWORD: "PlNa@8c6#Pyu+^+g",
+    EMAIL_NAME: "FinixaiBot",
+    EMAIL_FROM: "system@finixaibot.com",
+    ALCHEMY_WEBHOOK_AUTH_KEY: process.env.ALCHEMY_WEBHOOK_AUTH_KEY,
+}

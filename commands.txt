@@ -1,0 +1,4 @@
+
+pm2 start yarn --name "finixltd-backend" -- start
+
+
