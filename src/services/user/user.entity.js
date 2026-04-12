@@ -1,4 +1,4 @@
-
+const User = require('./user.schema');
 
 
 module.exports.login = ({ crypto, settings }) => async (req, res) => {
@@ -10,18 +10,9 @@ module.exports.login = ({ crypto, settings }) => async (req, res) => {
     const password = crypto.decrypt(user.password);
 
     if (password != req.body.password.trim()) return res.status(400).send({ success: false, message: 'Incorrect Password' });
-    const bearerToken = crypto.encrypt({ _id: user._id, email: user.email });
-    res.cookie(settings.COOKIE_NAME, bearerToken, {
-      httpOnly: true,
-      ...settings.useHTTP2 && {
-        sameSite: 'None',
-        secure: true,
-      },
-      ...!req.body.rememberMe && { expires: new Date(Date.now() + 172800000/*2 days*/) },
-    });
-    const cart = await Cart.find({ user: user._id }).populate('product');
-    let userObj = JSON.parse(JSON.stringify(user));
-    return res.status(200).send({ success: true, message: 'Credential matched', Authorization: 'BEARER ' + bearerToken, data: {...userObj, cart: cart} })
+    const bearerToken = crypto.encrypt({ _id: user._id, email: user.email, validity: Date.now() + 604800000/*7 days*/ });
+
+    return res.status(200).send({ success: true, message: 'Credential matched', data: { authorization: bearerToken, user: user} })
 
   } catch (error) {
     console.log(error);

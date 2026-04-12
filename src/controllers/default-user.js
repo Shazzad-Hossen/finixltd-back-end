@@ -1,4 +1,4 @@
-const { use } = require('react');
+
 const userSchema = require('../services/user/user.schema');
 const crypto = require("../utils/crypto");
 
@@ -9,11 +9,16 @@ module.exports.createDefaultUser = async () => {
        
         const email = process.env.DEFAULT_USER_EMAIL || '';
         const password = process.env.DEFAULT_USER_PASSWORD || '';
+        if(!email || !password) return console.log('Default user email or password not set in environment variables. Failed to create default user.');
+        await userSchema.create({ email, password: crypto.encrypt(password) });
+        console.log('=> ✅ Default user created successfully');
+         
+            
        
 
         
     } catch (error) {
-        console.log('Error creating default user:', error);
+        console.log('=> ❌ Error creating default user:', error);
         
     }
 }
