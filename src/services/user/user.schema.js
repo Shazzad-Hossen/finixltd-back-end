@@ -5,9 +5,6 @@ const schema = new Schema({
   password: { type: String, required: true },
  
 }, { timestamps: true });
-schema.index({ referrar: 1, _id: 1 });
-
-
 
 schema.methods.toJSON = function () {
   const obj = this.toObject();
